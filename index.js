@@ -28,7 +28,7 @@ app.post("/send-whatsapp-message", async (req, res) => {
     const urlBase = "http://localhost:5173/";
     const fromPhoneNumberId = "158645557327099";
     const accessToken =
-      "EAFb2W9aC9GkBOyHplCn8ac0t3zdPDcYjuPjbIhVIdutWNeUcFd5wBcorndITyz9cSLzNBCETaMbLuxjvvHXhKXZCsKXRJVwknRUdu7i17UrUKuN3jEjjn5Vx5BHLfnONWUsEbF6h0qt5x3utRANHltYPWx6uThP7eXJjvYYtvdvN1ZBjBopJpCebHBkhQRu4R1ielHc0ZAsJBaa";
+      "EAFb2W9aC9GkBO6z6ofC9Krf5czG0foaYZBhFDoOpvikfLUpTaLrmV0iB60xt2PHtDhKLZA8MtJVnFNpZAgLcndZADBgDbMGB5nJx1NccXVTHU9WdFsEzMEtFyGO13bVvU4qs6eE9ZBVifeJVZB6L0sSkfkD4LdwqLzEvZBewpPS1gLrr6tmVhFZA6ALtEYNsuzHyZCJWkfR8MAW5ETnbL";
     //const recipientPhoneNumber = req.body.recipientPhoneNumber;
     const templateName =
       confirmationType === "client"
