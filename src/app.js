@@ -1,26 +1,25 @@
 const express = require("express");
-const axios = require("axios");
 const cors = require("cors");
 const morgan = require("morgan");
+const axios = require("axios");
 
 const app = express();
-const port = process.env.PORT || 3000; // Choose a suitable port
 
-app.use(express.json());
 app.use(cors());
 app.use(morgan("combined"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   const htmlResponse = `
-    <html>
-      <head>
-        <title>NodeJs y Express en Vercel</title>
-      </head>
-      <body>
-        <h1>Soy un proyecto Back end en vercel</h1>
-      </body>
-    </html>
-  `;
+      <html>
+        <head>
+          <title>NodeJs y Express en Vercel</title>
+        </head>
+        <body>
+          <h1>Soy un proyecto Back end en vercel</h1>
+        </body>
+      </html>
+    `;
   res.send(htmlResponse);
 });
 
@@ -31,7 +30,7 @@ app.post("/send-whatsapp-message", async (req, res) => {
     const urlBase = "http://localhost:5173/";
     const fromPhoneNumberId = "158645557327099";
     const accessToken =
-      "EAFb2W9aC9GkBO6z6ofC9Krf5czG0foaYZBhFDoOpvikfLUpTaLrmV0iB60xt2PHtDhKLZA8MtJVnFNpZAgLcndZADBgDbMGB5nJx1NccXVTHU9WdFsEzMEtFyGO13bVvU4qs6eE9ZBVifeJVZB6L0sSkfkD4LdwqLzEvZBewpPS1gLrr6tmVhFZA6ALtEYNsuzHyZCJWkfR8MAW5ETnbL";
+      "EAFb2W9aC9GkBO5TowA3v8g0iunnD0lKZAFeEicWIXGkqx50tYtlGKgeAz9AIhOsRgYs6ND7jn3HKucpI2ijnznRBLWTn1ETeTHfd6ZC1j6FrsYHA6JyITL0QqZBn9d6ZAIlh6s6GweerkRo2fw7rxjvrvZBXZBHJQhmrjehd8DsZCYZAvCMMVtAkQXEx023Hqe4nX3ScOheUGuVV5lDPawZDZD";
     //const recipientPhoneNumber = req.body.recipientPhoneNumber;
     const templateName =
       confirmationType === "client"
@@ -75,9 +74,16 @@ app.post("/send-whatsapp-message", async (req, res) => {
                 type: "text",
                 text: `${secondParameter}`,
               },
+            ],
+          },
+          {
+            type: "button",
+            sub_type : "url",
+            index: '0',
+            parameters: [
               {
                 type: "text",
-                text: `${urlBase}${urlToConfirm}${shift.id}`,
+                text: `${urlToConfirm}${shift.id}`,
               },
             ],
           },
@@ -96,6 +102,4 @@ app.post("/send-whatsapp-message", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is runing in http://localhost:${port}`);
-});
+module.exports = app;
