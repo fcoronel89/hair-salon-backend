@@ -14,7 +14,8 @@ api.get("/", (req, res) => {
         </head>
         <body>
           <h1>Soy un proyecto Back end en vercel</h1>
-          <a href='v1/auth/google'>Login</a>
+          <a href='auth/google'>Login</a>
+          <a href='auth/logout'>Logout</a>
         </body>
       </html>
     `;

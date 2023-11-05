@@ -1,18 +1,4 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-const AUTH_OPTIONS = {
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_SECRET,
-  callbackURL: "/v1/auth/google/callback",
-};
-
-function verifyCallback(accessToken, refreshToken, profile, done) {
-  console.log("Google Profile", profile);
-  done(null, profile);
-}
-
-passport.use(new GoogleStrategy(AUTH_OPTIONS, verifyCallback));
 
 function authenticate(req, res) {
   passport.authenticate("google", {
@@ -26,14 +12,9 @@ const authenticateOptions = {
 };
 
 function authenticateCallback(req, res) {
-  passport.authenticate("google", authenticateOptions, (err, user) => {
-    if (err) {
-      console.log("error", err);
-      // Handle authentication failure
-      return res.redirect("/v1/failure");
-    }
-    // Handle authentication success, e.g., store user data, set cookies, etc.
-    res.redirect("/v1");
+  passport.authenticate("google", {
+    failureRedirect: "/v1/failure",
+    successRedirect: "/v1/",
   })(req, res);
 }
 
@@ -42,4 +23,30 @@ function authenticateFail(req, res) {
   res.status(400).json({ error: "Authentication failed." });
 }
 
-module.exports = { authenticate, authenticateCallback, authenticateFail };
+function logout(req, res) {
+  // Passport provides a `logout` function to terminate the user's session
+  req.logout(() => {
+    // Redirect to a page or URL after logout (e.g., the home page)
+    res.redirect("/v1/");
+  });
+}
+
+function checkLoggedIn(req, res, next) {
+  //req.user
+  console.log("current user:", req.user);
+  const isLoggedIn = req.isAuthenticated() && req.user;
+  if (!isLoggedIn) {
+    return res.status(401).json({
+      error: "You must log in!",
+    });
+  }
+  next();
+}
+
+module.exports = {
+  authenticate,
+  authenticateCallback,
+  authenticateFail,
+  logout,
+  checkLoggedIn,
+};
