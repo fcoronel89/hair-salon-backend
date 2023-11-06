@@ -4,6 +4,8 @@ const app = require("./app");
 
 require("dotenv").config();
 
+const { mongoConnect } = require("./services/mongo");
+
 const port = process.env.PORT || 3000; // Choose a suitable port
 
 const server = https.createServer(
@@ -15,6 +17,7 @@ const server = https.createServer(
 );
 
 async function startsServer() {
+  await mongoConnect();
   server.listen(port, () => {
     console.log(`Server is runing in http://localhost:${port}`);
   });
