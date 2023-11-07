@@ -1,6 +1,8 @@
 // passport-config.js
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const { findUserByGoogleId, saveUser } = require("../models/user.model");
+
 require("dotenv").config();
 
 const AUTH_OPTIONS = {
@@ -16,7 +18,7 @@ module.exports = function (passport) {
   // save the session to the cookie
   passport.serializeUser((user, done) => {
     console.log("user", user);
-    done(null, user._json);
+    done(null, user);
   });
 
   // Read the session from the cookie
@@ -25,9 +27,20 @@ module.exports = function (passport) {
     done(null, obj);
   });
 
-  function verifyCallback(accessToken, refreshToken, profile, done) {
+  async function verifyCallback(accessToken, refreshToken, profile, done) {
     console.log("Google Profile", profile);
     // You can store user data or perform other actions here
-    done(null, profile);
+    const user = await findUserByGoogleId(profile.id);
+
+    if (user) {
+      done(null, existingUser);
+    } else {
+      const newUser = {
+        googleId: profile.id,
+        email: profile._json.email,
+      };
+      await saveUser(newUser);
+      done(null, newUser);
+    }
   }
 };

@@ -1,4 +1,5 @@
 const passport = require("passport");
+require("dotenv").config();
 
 function authenticate(req, res) {
   passport.authenticate("google", {
@@ -14,7 +15,7 @@ const authenticateOptions = {
 function authenticateCallback(req, res) {
   passport.authenticate("google", {
     failureRedirect: "/v1/failure",
-    successRedirect: "/v1/",
+    successRedirect: "/v1/auth/success",
   })(req, res);
 }
 
@@ -43,10 +44,20 @@ function checkLoggedIn(req, res, next) {
   next();
 }
 
+function authSuccess(req, res) {
+  // Redirect the user back to the React frontend with user data
+  console.log("req", req.user);
+  const redirectUrl = req.user.firstName
+    ? "/agenda"
+    : `/crear-usuario/${req.user.googleId}`;
+  res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}`);
+}
+
 module.exports = {
   authenticate,
   authenticateCallback,
   authenticateFail,
   logout,
   checkLoggedIn,
+  authSuccess,
 };

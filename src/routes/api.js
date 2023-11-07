@@ -1,11 +1,13 @@
 const express = require("express");
 const whatsappRouter = require("./whatsapp/whatsapp.router");
 const authRouter = require("./auth/auth.router");
+const userRouter = require("./user/user.router");
 
 const api = express.Router();
 
 api.use(whatsappRouter);
 api.use(authRouter);
+api.use(userRouter);
 api.get("/", (req, res) => {
   const htmlResponse = `
       <html>
@@ -19,6 +21,7 @@ api.get("/", (req, res) => {
         </body>
       </html>
     `;
+  console.log("home");
   return res.send(htmlResponse);
 });
 

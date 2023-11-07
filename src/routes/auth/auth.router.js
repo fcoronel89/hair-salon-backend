@@ -5,8 +5,8 @@ const {
   authenticateFail,
   logout,
   checkLoggedIn,
+  authSuccess,
 } = require("./auth.controller");
-const passport = require("passport");
 
 const authRouter = express.Router();
 
@@ -17,5 +17,7 @@ authRouter.get("/failure", authenticateFail);
 authRouter.get("/secret", checkLoggedIn, (req, res) => {
   return res.send("Your personal secret is 42");
 });
+authRouter.get('/auth/success', authSuccess);
+
 
 module.exports = authRouter;
