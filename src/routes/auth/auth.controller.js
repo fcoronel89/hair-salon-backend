@@ -49,7 +49,7 @@ function authSuccess(req, res) {
   console.log("req", req.user);
   const redirectUrl = req.user.firstName
     ? "/agenda"
-    : `/crear-usuario/${req.user.googleId}`;
+    : `/crear-usuario/${req.user._id}`;
   res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}`);
 }
 

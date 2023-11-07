@@ -1,7 +1,7 @@
 // passport-config.js
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { findUserByGoogleId, saveUser } = require("../models/user.model");
+const { findUserByGoogleId, createUser } = require("../models/user.model");
 
 require("dotenv").config();
 
@@ -33,14 +33,14 @@ module.exports = function (passport) {
     const user = await findUserByGoogleId(profile.id);
 
     if (user) {
-      done(null, existingUser);
+      done(null, user);
     } else {
       const newUser = {
         googleId: profile.id,
         email: profile._json.email,
       };
-      await saveUser(newUser);
-      done(null, newUser);
+      const user = await createUser(newUser);
+      done(null, user);
     }
   }
 };

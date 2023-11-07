@@ -1,8 +1,9 @@
 const express = require("express");
-const { getUserByGoogleId } = require("./user.controller");
+const { getUserById, saveUser } = require("./user.controller");
 
 const userRouter = express.Router();
 
-userRouter.get("/user/:googleId", getUserByGoogleId);
+userRouter.get("/user/:userId", getUserById);
+userRouter.put("/user/:userId", saveUser);
 
 module.exports = userRouter;
