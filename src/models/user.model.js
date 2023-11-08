@@ -26,7 +26,15 @@ async function createUser(user) {
 async function updateUser(userId, userData) {
   try {
     console.log("userId", userId, userData);
-    return await User.findByIdAndUpdate(userId, userData, { new: true });
+    const userType =
+      userData.userType === "seller" || userData.userType === "hairsalon"
+        ? userData.userType
+        : "hairsalon";
+    return await User.findByIdAndUpdate(
+      userId,
+      { ...userData, userType },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }
