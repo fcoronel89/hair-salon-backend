@@ -27,8 +27,7 @@ function authenticateFail(req, res) {
 function logout(req, res) {
   // Passport provides a `logout` function to terminate the user's session
   req.logout(() => {
-    // Redirect to a page or URL after logout (e.g., the home page)
-    res.redirect("/v1/");
+    res.status(200).json({ ok: true });
   });
 }
 
@@ -47,10 +46,8 @@ function checkLoggedIn(req, res, next) {
 function authSuccess(req, res) {
   // Redirect the user back to the React frontend with user data
   console.log("req", req.user);
-  const redirectUrl = req.user.firstName
-    ? "/agenda"
-    : `/crear-usuario/${req.user._id}`;
-  res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}`);
+  const redirectUrl = req.user.firstName ? "/login/" : `/crear-usuario/`;
+  res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}${req.user._id}`);
 }
 
 module.exports = {
