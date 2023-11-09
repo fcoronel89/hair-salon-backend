@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createNewProfessional,
   updateProfessional,
+  findProfessionalById,
 } = require("./professional.controller");
 const { checkLoggedIn, checkIsAdmin } = require("../auth/auth.controller");
 
@@ -19,6 +20,12 @@ professionalRouter.put(
   checkLoggedIn,
   checkIsAdmin,
   updateProfessional
+);
+
+professionalRouter.get(
+  "/professional/:professionalId",
+  checkLoggedIn,
+  findProfessionalById
 );
 
 module.exports = professionalRouter;

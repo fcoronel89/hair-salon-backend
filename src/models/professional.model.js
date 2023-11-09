@@ -41,7 +41,12 @@ async function updateProfessional(professionalId, professional) {
   }
 }
 
+async function findProfessionalById(professionalId) {
+  return await Professional.findById(professionalId);
+}
+
 module.exports = {
   createProfessional,
   updateProfessional,
+  findProfessionalById,
 };

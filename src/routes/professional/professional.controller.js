@@ -13,17 +13,32 @@ async function updateProfessional(req, res) {
   try {
     const professionalId = req.params.professionalId;
     const updatedProfessionalData = req.body;
-    const updatedProfessional =await professionalModel.updateProfessional(
+    const updatedProfessional = await professionalModel.updateProfessional(
       professionalId,
       updatedProfessionalData
     );
-    return res.status(200).json({ ok: true, professional: updatedProfessional });
+    return res
+      .status(200)
+      .json({ ok: true, professional: updatedProfessional });
   } catch (err) {
     return res.status(400).json({ error: err.message });
+  }
+}
+
+async function findProfessionalById(req, res) {
+  try {
+    const professionalId = req.params.professionalId;
+    const professional = await professionalModel.findProfessionalById(
+      professionalId
+    );
+    res.status(200).json({ professional });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 }
 
 module.exports = {
   createNewProfessional,
   updateProfessional,
+  findProfessionalById,
 };
