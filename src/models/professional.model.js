@@ -20,6 +20,28 @@ async function createProfessional(professional) {
   }
 }
 
-module.exports = {
-    createProfessional
+async function updateProfessional(professionalId, professional) {
+  try {
+    const existingProfessionalWithPhone = await Professional.findOne({
+      phone: professional.phone,
+      _id: { $ne: professionalId }, // Exclude the current user being updated
+    });
+    if (existingProfessionalWithPhone) {
+      throw new Error("Professional with this phone already exist");
+    }
+    // Update the user's information
+    const updatedProfessional = await Professional.findByIdAndUpdate(
+      professionalId,
+      professional,
+      { new: true }
+    );
+    return updatedProfessional;
+  } catch (err) {
+    throw err;
+  }
 }
+
+module.exports = {
+  createProfessional,
+  updateProfessional,
+};
