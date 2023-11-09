@@ -12,14 +12,19 @@ require("dotenv").config();
 
 const app = express();
 
+const corsOptions = {
+  origin: 'https://localhost:5173', // Replace with the actual origin of your React app
+  credentials: true, // Allow credentials (cookies, sessions)
+};
+
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(
   expressSession({
     secret: process.env.COOKIE_KEY_1, // Replace with a strong secret key
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {
       maxAge: 60 * 24 * 60 * 60 * 1000, // Session duration in milliseconds
