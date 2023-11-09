@@ -31,7 +31,7 @@ async function findProfessionalById(req, res) {
     const professional = await professionalModel.findProfessionalById(
       professionalId
     );
-    res.status(200).json({ professional });
+    res.status(200).json(professional);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
