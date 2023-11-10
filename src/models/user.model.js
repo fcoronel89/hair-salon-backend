@@ -40,4 +40,19 @@ async function updateUser(userId, userData) {
   }
 }
 
-module.exports = { findUserByGoogleId, createUser, updateUser, findUserById };
+async function getAllUsers() {
+  try {
+    const users = await User.find();
+    return users;
+  } catch (err) {
+    throw err;
+  }
+}
+
+module.exports = {
+  findUserByGoogleId,
+  createUser,
+  updateUser,
+  findUserById,
+  getAllUsers,
+};
