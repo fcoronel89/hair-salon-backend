@@ -5,7 +5,7 @@ async function createNewProfessional(req, res) {
     await professionalModel.createProfessional(req.body);
     res.status(201).json({ message: "professional created successfull" });
   } catch (err) {
-    res.status("400").json({ error: err });
+    res.status(400).json({ error: err.message });
   }
 }
 
