@@ -45,8 +45,18 @@ async function findProfessionalById(professionalId) {
   return await Professional.findById(professionalId);
 }
 
+async function getAllProfessionals() {
+  try {
+    const professionals = await Professional.find();
+    return professionals;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   createProfessional,
   updateProfessional,
   findProfessionalById,
+  getAllProfessionals,
 };

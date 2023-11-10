@@ -37,8 +37,18 @@ async function findProfessionalById(req, res) {
   }
 }
 
+async function getAllProfessionals(req, res) {
+  try {
+    const professionals = await professionalModel.getAllProfessionals();
+    res.status(200).json(professionals);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewProfessional,
   updateProfessional,
   findProfessionalById,
+  getAllProfessionals,
 };
