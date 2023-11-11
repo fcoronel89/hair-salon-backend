@@ -35,7 +35,6 @@ function logout(req, res) {
 function checkLoggedIn(req, res, next) {
   //req.user
   console.log("current user:", req.user);
-  console.log("current Session:", req.session);
   const isLoggedIn = req.isAuthenticated() && req.user;
   if (!isLoggedIn) {
     return res.status(401).json({
@@ -48,6 +47,16 @@ function checkLoggedIn(req, res, next) {
 function checkIsAdmin(req, res, next) {
   const isAdmin = req.user.userType === 'admin';
   if(!isAdmin){
+    return res.status(403).json({
+      error: "You dont have permission",
+    });
+  }
+  next();
+}
+
+function checkIsAdminOrSeller(req, res, next) {
+  const hasAccess = req.user.userType === 'admin' || req.user.userType === 'seller';
+  if(!hasAccess){
     return res.status(403).json({
       error: "You dont have permission",
     });
@@ -70,5 +79,6 @@ module.exports = {
   logout,
   checkLoggedIn,
   checkIsAdmin,
+  checkIsAdminOrSeller,
   authSuccess,
 };

@@ -1,9 +1,9 @@
 const express = require("express");
 const { createNewShift } = require("./shift.controller");
-const { checkLoggedIn, checkIsAdmin } = require("../auth/auth.controller");
+const { checkLoggedIn, checkIsAdminOrSeller } = require("../auth/auth.controller");
 
 const shiftRouter = express.Router();
 
-shiftRouter.post("/shift", createNewShift);
+shiftRouter.post("/shift", checkLoggedIn, checkIsAdminOrSeller, createNewShift);
 
 module.exports = shiftRouter;

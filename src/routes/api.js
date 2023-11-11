@@ -4,6 +4,7 @@ const authRouter = require("./auth/auth.router");
 const userRouter = require("./user/user.router");
 const professionalRouter = require("./professional/professional.router");
 const shiftRouter = require("./shift/shift.router");
+const clientRouter = require("./client/client.router");
 
 const api = express.Router();
 
@@ -12,6 +13,7 @@ api.use(authRouter);
 api.use(userRouter);
 api.use(professionalRouter);
 api.use(shiftRouter);
+api.use(clientRouter);
 api.get("/", (req, res) => {
   const htmlResponse = `
       <html>
