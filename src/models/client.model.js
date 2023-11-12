@@ -22,4 +22,5 @@ async function createClient(client) {
 
 module.exports = {
   createClient,
+  findClient,
 };
