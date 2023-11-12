@@ -14,7 +14,17 @@ async function findShiftById(shiftId) {
   return await Shift.findById(shiftId);
 }
 
+async function getAllShifts() {
+  try {
+    const shifts = await Shift.find();
+    return shifts;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   createShift,
-  findShiftById
+  findShiftById,
+  getAllShifts
 };

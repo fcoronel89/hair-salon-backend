@@ -22,7 +22,21 @@ async function findShiftById(req, res) {
   }
 }
 
+async function getAllShifts(req, res) {
+  try {
+    const shifts = await shiftModel.getAllShifts();
+    if (!shifts) {
+      res.status(400).json({ error: "dont have shifts" });
+    } else {
+      res.status(200).json(shifts);
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewShift,
   findShiftById,
+  getAllShifts,
 };
