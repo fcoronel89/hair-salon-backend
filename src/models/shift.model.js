@@ -10,6 +10,11 @@ async function createShift(shift) {
   }
 }
 
+async function findShiftById(shiftId) {
+  return await Shift.findById(shiftId);
+}
+
 module.exports = {
   createShift,
+  findShiftById
 };
