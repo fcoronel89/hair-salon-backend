@@ -3,7 +3,9 @@ const shiftModel = require("../../models/shift.model");
 async function createNewShift(req, res) {
   try {
     const newShift = await shiftModel.createShift(req.body);
-    res.status(201).json({ shift: newShift, message: "shift created successfull" });
+    res
+      .status(201)
+      .json({ shift: newShift, message: "shift created successfull" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -35,8 +37,23 @@ async function getAllShifts(req, res) {
   }
 }
 
+async function updateShift(req, res) {
+  try {
+    const shiftId = req.params.shiftId;
+    const updatedShiftData = req.body;
+    const updatedPShift = await shiftModel.updateShift(
+      shiftId,
+      updatedShiftData
+    );
+    return res.status(200).json({ ok: true, shift: updatedPShift });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewShift,
   findShiftById,
   getAllShifts,
+  updateShift,
 };

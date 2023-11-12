@@ -24,8 +24,21 @@ async function getAllShifts() {
   }
 }
 
+async function updateShift(shiftId, shift) {
+  try {
+    const updatedShift = await Shift.findByIdAndUpdate(shiftId, shift, {
+      new: true,
+    });
+
+    return updatedShift;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   createShift,
   findShiftById,
-  getAllShifts
+  getAllShifts,
+  updateShift,
 };
