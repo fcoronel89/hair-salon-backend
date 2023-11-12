@@ -5,6 +5,7 @@ async function createShift(shift) {
     const newShift = new Shift(shift);
     console.log(newShift);
     await newShift.save();
+    return newShift;
   } catch (err) {
     throw err;
   }

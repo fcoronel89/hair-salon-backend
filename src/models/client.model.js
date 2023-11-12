@@ -15,6 +15,7 @@ async function createClient(client) {
     const newClient = new Client(client);
     console.log(newClient);
     await newClient.save();
+    return newClient;
   } catch (err) {
     throw new Error(err);
   }
