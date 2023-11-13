@@ -1,5 +1,9 @@
 const express = require("express");
-const { createNewClient, findClientByPhone } = require("./client.controller");
+const {
+  createNewClient,
+  findClientByPhone,
+  findClientById,
+} = require("./client.controller");
 const {
   checkLoggedIn,
   checkIsAdminOrSeller,
@@ -14,5 +18,6 @@ clientRouter.post(
   createNewClient
 );
 clientRouter.get("/clients", checkLoggedIn, findClientByPhone);
+clientRouter.get("/client/:clientId", checkLoggedIn, findClientById);
 
 module.exports = clientRouter;

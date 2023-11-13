@@ -22,7 +22,18 @@ async function findClientByPhone(req, res) {
   }
 }
 
+async function findClientById(req, res) {
+  const clientId = req.params.clientId;
+  try {
+    const existingClient = await clientModel.findClientById(clientId);
+    res.status(200).json(existingClient || null);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewClient,
   findClientByPhone,
+  findClientById,
 };
