@@ -45,8 +45,8 @@ function checkLoggedIn(req, res, next) {
 }
 
 function checkIsAdmin(req, res, next) {
-  const isAdmin = req.user.userType === 'admin';
-  if(!isAdmin){
+  const isAdmin = req.user.userType === "admin";
+  if (!isAdmin) {
     return res.status(403).json({
       error: "You dont have permission",
     });
@@ -55,8 +55,9 @@ function checkIsAdmin(req, res, next) {
 }
 
 function checkIsAdminOrSeller(req, res, next) {
-  const hasAccess = req.user.userType === 'admin' || req.user.userType === 'seller';
-  if(!hasAccess){
+  const hasAccess =
+    req.user.userType === "admin" || req.user.userType === "seller";
+  if (!hasAccess) {
     return res.status(403).json({
       error: "You dont have permission",
     });
@@ -72,6 +73,11 @@ function authSuccess(req, res) {
   res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}${req.user._id}`);
 }
 
+function isLoggedIn(req, res) {
+  const isLoggedIn = req.isAuthenticated() && req.user;
+  return res.status(200).json(isLoggedIn);
+}
+
 module.exports = {
   authenticate,
   authenticateCallback,
@@ -81,4 +87,5 @@ module.exports = {
   checkIsAdmin,
   checkIsAdminOrSeller,
   authSuccess,
+  isLoggedIn,
 };
