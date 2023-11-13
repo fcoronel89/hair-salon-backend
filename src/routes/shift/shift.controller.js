@@ -51,9 +51,23 @@ async function updateShift(req, res) {
   }
 }
 
+async function deleteShift(req, res) {
+  try {
+    const shiftId = req.params.shiftId;
+    const user = req.user;
+
+    await shiftModel.deleteShift(shiftId, user);
+
+    return res.status(200).json({ message: "Shift deleted successfully" });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewShift,
   findShiftById,
   getAllShifts,
   updateShift,
+  deleteShift,
 };

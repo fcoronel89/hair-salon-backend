@@ -36,9 +36,28 @@ async function updateShift(shiftId, shift) {
   }
 }
 
+async function deleteShift(shiftId, user) {
+  try {
+    const existingShift = await findShiftById(shiftId);
+
+    if (!existingShift) {
+      throw new Error("Shift not found");
+    }
+
+    if (existingShift.creatorId !== user._id && user.userType !== "admin") {
+      throw new Error("Not Allowed to delete");
+    }
+
+    await existingShift.deleteOne();
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   createShift,
   findShiftById,
   getAllShifts,
   updateShift,
+  deleteShift,
 };
