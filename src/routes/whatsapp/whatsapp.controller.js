@@ -33,7 +33,7 @@ function getDataToSend(shift, professional, confirmationType) {
           parameters: [
             {
               type: "text",
-              text: `${shift.shiftDate} a las ${shift.time}`,
+              text: `${shift.date} a las ${shift.time}`,
             },
             {
               type: "text",
@@ -48,7 +48,7 @@ function getDataToSend(shift, professional, confirmationType) {
           parameters: [
             {
               type: "text",
-              text: `${urlToConfirm}${shift.id}`,
+              text: `${urlToConfirm}${shift._id}`,
             },
           ],
         },
