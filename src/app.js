@@ -38,6 +38,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/v1", api);
+app.use("/api/v1", api);
 
 module.exports = app;
