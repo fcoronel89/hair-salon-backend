@@ -34,6 +34,8 @@ async function startServer() {
     server.listen(port, () => {
       console.log(`Server is running in http://localhost:${port}`);
     });
+
+    return server; // Return the server instance
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     process.exit(1); // Exit the application on connection error
