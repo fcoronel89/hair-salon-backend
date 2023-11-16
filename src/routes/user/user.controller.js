@@ -5,11 +5,15 @@ async function getUserById(req, res) {
   if (!userId) {
     return res(500).json({ error: "missing parameter" });
   }
-  const user = await usersModel.findUserById(userId);
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
+  try {
+    const user = await usersModel.findUserById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ user });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
-  return res.status(200).json({ user });
 }
 
 async function saveUser(req, res) {
@@ -34,5 +38,5 @@ async function getAllUsers(req, res) {
 module.exports = {
   getUserById,
   saveUser,
-  getAllUsers
+  getAllUsers,
 };

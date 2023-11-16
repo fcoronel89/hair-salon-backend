@@ -7,15 +7,10 @@ function authenticate(req, res) {
   })(req, res);
 }
 
-// Define the options with session set to true
-const authenticateOptions = {
-  session: true,
-};
-
 function authenticateCallback(req, res) {
   passport.authenticate("google", {
-    failureRedirect: "/v1/failure",
-    successRedirect: "/v1/auth/success",
+    failureRedirect: `${process.env.API_URL}/v1/failure`,
+    successRedirect: `${process.env.API_URL}/v1/auth/success`,
     session: true,
   })(req, res);
 }
@@ -68,9 +63,8 @@ function checkIsAdminOrSeller(req, res, next) {
 function authSuccess(req, res) {
   // Redirect the user back to the React frontend with user data
   console.log("req", req.user);
-  const redirectUrl = req.user.firstName ? "/login/" : `/crear-usuario/`;
-  req.session.user = req.user;
-  res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}${req.user._id}`);
+  const redirectUrl = "/login/";
+  res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}${req.user}`);
 }
 
 function isLoggedIn(req, res) {

@@ -31,9 +31,8 @@ professionalRouter.get(
 
 professionalRouter.get(
   "/professionals",
-  getAllProfessionals,
   checkLoggedIn,
-  checkIsAdmin
+  getAllProfessionals,
 );
 
 module.exports = professionalRouter;

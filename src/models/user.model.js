@@ -36,7 +36,7 @@ async function updateUser(userId, userData) {
       { new: true }
     );
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
 

@@ -5,8 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "watch": "nodemon src/server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "start:local": "nodemon src/local.js"
   },
   "keywords": [],
   "author": "",
@@ -26,5 +27,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

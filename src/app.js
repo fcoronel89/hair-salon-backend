@@ -19,25 +19,32 @@ const corsOptions = {
   credentials: true, // Allow credentials (cookies, sessions)
 };
 
+app.set("trust proxy", 1);
+
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(
   expressSession({
-    //store: sessionStore, // Use the imported session store
     secret: process.env.COOKIE_KEY_1, // Replace with a strong secret key
     resave: false,
     saveUninitialized: false,
     cookie: {
       maxAge: 60 * 24 * 60 * 60 * 1000, // Session duration in milliseconds
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
     },
-    store: MongoStore.create({mongoUrl: process.env.MONGO_URL, collectionName: 'sessions'})
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: "sessions",
+    }),
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/v1", api);
+app.use("/v1", api);
 
 module.exports = app;
