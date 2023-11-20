@@ -1,7 +1,7 @@
 const usersModel = require("../../models/user.model");
 
 async function getUserById(req, res) {
-  const userId = req.params.userId;
+  const userId = req.params?.userId;
   if (!userId) {
     return res(500).json({ error: "missing parameter" });
   }

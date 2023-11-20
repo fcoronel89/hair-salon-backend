@@ -1,4 +1,5 @@
 const passport = require("passport");
+const { findUserById } = require("../../models/user.model");
 require("dotenv").config();
 
 function authenticate(req, res) {
@@ -39,8 +40,9 @@ function checkLoggedIn(req, res, next) {
   next();
 }
 
-function checkIsAdmin(req, res, next) {
-  const isAdmin = req.user.userType === "admin";
+async function checkIsAdmin(req, res, next) {
+  const user = await findUserById(req.user);
+  const isAdmin = user.userType === "admin";
   if (!isAdmin) {
     return res.status(403).json({
       error: "You dont have permission",
