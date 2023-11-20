@@ -51,9 +51,10 @@ async function checkIsAdmin(req, res, next) {
   next();
 }
 
-function checkIsAdminOrSeller(req, res, next) {
+async function checkIsAdminOrSeller(req, res, next) {
+  const user = await findUserById(req.user);
   const hasAccess =
-    req.user.userType === "admin" || req.user.userType === "seller";
+    user.userType === "admin" || user.userType === "seller";
   if (!hasAccess) {
     return res.status(403).json({
       error: "You dont have permission",
