@@ -18,6 +18,7 @@ shiftRouter.get("/shift/:shiftId", checkLoggedIn, findShiftById);
 shiftRouter.get("/shifts", checkLoggedIn, getAllShifts);
 shiftRouter.put("/shift/:shiftId", checkLoggedIn, updateShift);
 shiftRouter.put("/shift/confirm-shift/:shiftId", updateShift);
+shiftRouter.get("/shift/confirm-shift/:shiftId", findShiftById);
 shiftRouter.delete("/shift/:shiftId", checkLoggedIn, deleteShift);
 
 module.exports = shiftRouter;
