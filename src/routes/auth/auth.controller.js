@@ -23,7 +23,11 @@ function authenticateFail(req, res) {
 
 function logout(req, res) {
   // Passport provides a `logout` function to terminate the user's session
+  const continueUrl = encodeURIComponent('https://localhost:3000/');
+  const logoutUrl = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://localhost:3000/'
+
   req.logout(() => {
+    // res.redirect(logoutUrl);
     res.status(200).json({ ok: true });
   });
 }

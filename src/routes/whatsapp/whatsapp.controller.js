@@ -20,7 +20,7 @@ function getDataToSend(shift, professional, confirmationType) {
   return {
     messaging_product: "whatsapp",
     recipient_type: "individual",
-    to: "542234215869",
+    to: professional.phone,
     type: "template",
     template: {
       name: templateName,
