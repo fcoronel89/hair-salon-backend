@@ -2,3 +2,4 @@
 .env.prod
 .vercel
 node_modules
+*.pem
