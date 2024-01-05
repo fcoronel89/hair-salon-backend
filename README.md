@@ -1,4 +1,4 @@
-# Hair Salon Frontend 
+# Hair Salon Backend
 
 ## Proyect Description
 
