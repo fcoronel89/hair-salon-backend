@@ -34,13 +34,14 @@ module.exports = function (passport) {
   async function verifyCallback(accessToken, refreshToken, profile, done) {
     // You can store user data or perform other actions here
     const user = await findUserByGoogleId(profile.id);
-
+    console.log("profile", profile);
     if (user) {
       done(null, user._id);
     } else {
       const newUser = {
         googleId: profile.id,
         email: profile._json.email,
+        avatar: profile._json.picture,
       };
       const user = await createUser(newUser);
       done(null, user._id);

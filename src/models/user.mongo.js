@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   userType: { type: String },
   birthDate: { type: Date },
   active: { type: Boolean },
+  avatar: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);
