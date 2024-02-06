@@ -43,7 +43,7 @@ async function deleteShift(shiftId, user) {
     if (!existingShift) {
       throw new Error("Shift not found");
     }
-
+    
     if (existingShift.creatorId !== user._id && user.userType !== "admin") {
       throw new Error("Not Allowed to delete");
     }

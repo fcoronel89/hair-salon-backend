@@ -1,4 +1,5 @@
 const shiftModel = require("../../models/shift.model");
+const { findUserById } = require("../../models/user.model");
 
 async function createNewShift(req, res) {
   try {
@@ -54,7 +55,9 @@ async function updateShift(req, res) {
 async function deleteShift(req, res) {
   try {
     const shiftId = req.params.shiftId;
-    const user = req.user;
+    const userId = req.user;
+
+    const user = await findUserById(userId);
 
     await shiftModel.deleteShift(shiftId, user);
 

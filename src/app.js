@@ -9,14 +9,15 @@ const MongoStore = require("connect-mongo");
 require("./config/passport-config")(passport);
 
 const api = require("./routes/api");
+const cookieMaxAge = 60 * 24 * 60 * 60 * 1000; // Session duration in milliseconds
 
 require("dotenv").config();
 
 const app = express();
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL, // Replace with the actual origin of your React app
-  credentials: true, // Allow credentials (cookies, sessions)
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
 };
 
 app.set("trust proxy", 1);
@@ -27,11 +28,11 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(
   expressSession({
-    secret: process.env.COOKIE_KEY_1, // Replace with a strong secret key
+    secret: process.env.COOKIE_KEY_1,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 60 * 24 * 60 * 60 * 1000, // Session duration in milliseconds
+      maxAge: cookieMaxAge, 
       secure: true,
       httpOnly: true,
       sameSite: "none",
