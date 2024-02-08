@@ -3,10 +3,9 @@ const clientModel = require("../../models/client.model");
 async function createNewClient(req, res) {
   try {
     const newClient = await clientModel.createClient(req.body);
-    console.log("newClient", newClient);
     res
       .status(201)
-      .json({ client: newClient, message: "Client created successfull" });
+      .json(newClient);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
