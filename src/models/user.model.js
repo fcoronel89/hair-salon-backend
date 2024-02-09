@@ -4,6 +4,10 @@ async function findUser(filter) {
   return await User.findOne(filter);
 }
 
+async function findUsersByFilter(filter) {
+  return await User.find(filter);
+}
+
 async function findUserByGoogleId(googleId) {
   return await findUser({ googleId });
 }
@@ -55,4 +59,5 @@ module.exports = {
   updateUser,
   findUserById,
   getAllUsers,
+  findUsersByFilter,
 };

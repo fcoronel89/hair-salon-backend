@@ -35,8 +35,20 @@ async function getAllUsers(req, res) {
   }
 }
 
+async function getUsersByFilter(req, res) {
+  const { userType } = req.query;
+  const filter = userType ? { userType } : {};
+  try {
+    const users = await usersModel.findUsersByFilter(filter);
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getUserById,
   saveUser,
   getAllUsers,
+  getUsersByFilter,
 };

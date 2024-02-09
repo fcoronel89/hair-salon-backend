@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema({
   birthDate: { type: Date },
   active: { type: Boolean },
   avatar: { type: String },
+  createdAt: { type: Date, default: Date.now },
+  neighbourhood: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);
