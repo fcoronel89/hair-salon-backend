@@ -8,6 +8,7 @@ const professionalSchema = new mongoose.Schema({
   image: { type: String, required: true },
   birthDate: { type: Date },
   serviceType: { type: [String], required: true },
+  hairSalons: { type: [String], required: true },
   active: { type: Boolean, required: true },
 });
 
