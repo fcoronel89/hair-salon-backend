@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter.get("/user/:userId", getUserById);
 userRouter.put("/user/:userId", saveUser);
-userRouter.get("/users", checkLoggedIn, checkIsAdmin, getAllUsers);
-userRouter.get("/users/filter", checkLoggedIn, checkIsAdmin, getUsersByFilter);
+userRouter.get("/users", checkLoggedIn, getAllUsers);
+userRouter.get("/users/filter", checkLoggedIn, getUsersByFilter);
 
 module.exports = userRouter;
