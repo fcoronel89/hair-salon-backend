@@ -13,6 +13,8 @@ const shiftSchema = new mongoose.Schema({
   serviceId: { type: String, required: true },
   subServiceId: { type: String, required: true },
   time: { type: String, required: true },
+  neighbourhood: { type: String, required: true },
+  hairsalonId: { type: String, required: true },
 });
 
 const Shift = mongoose.model("Shift", shiftSchema);
