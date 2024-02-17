@@ -31,8 +31,18 @@ async function findClientById(req, res) {
   }
 }
 
+async function getAllClients(req, res) {
+  try {
+    const clients = await clientModel.getAllClients();
+    res.status(200).json(clients);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createNewClient,
   findClientByPhone,
   findClientById,
+  getAllClients,
 };

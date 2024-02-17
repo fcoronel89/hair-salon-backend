@@ -3,6 +3,7 @@ const {
   createNewClient,
   findClientByPhone,
   findClientById,
+  getAllClients,
 } = require("./client.controller");
 const {
   checkLoggedIn,
@@ -19,5 +20,6 @@ clientRouter.post(
 );
 clientRouter.get("/clients", checkLoggedIn, findClientByPhone);
 clientRouter.get("/client/:clientId", checkLoggedIn, findClientById);
+clientRouter.get("/allClients", checkLoggedIn, getAllClients);
 
 module.exports = clientRouter;

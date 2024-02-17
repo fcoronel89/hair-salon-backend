@@ -25,8 +25,13 @@ async function findClientById(clientId) {
   return await Client.findById(clientId);
 }
 
+async function getAllClients() {
+  return await Client.find({});
+}
+
 module.exports = {
   createClient,
   findClient,
   findClientById,
+  getAllClients,
 };
