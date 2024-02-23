@@ -25,6 +25,7 @@ module.exports = function (passport) {
     done(null, user);
   });
 
+
   // Read the session from the cookie
   passport.deserializeUser(async (userId, done) => {
     console.log("deserializeUser", userId);
@@ -37,7 +38,7 @@ module.exports = function (passport) {
     const user = await findUserByGoogleId(profile.id);
     console.log("profile", profile);
     if (user) {
-      done(null, user._id);
+      done(null, user?._id);
     } else {
       const newUser = {
         googleId: profile.id,
