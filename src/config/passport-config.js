@@ -21,6 +21,7 @@ module.exports = function (passport) {
 
   // save the session to the cookie
   passport.serializeUser((user, done) => {
+    console.log("serializeUser", user);
     done(null, user);
   });
 
@@ -28,7 +29,7 @@ module.exports = function (passport) {
   passport.deserializeUser(async (userId, done) => {
     console.log("deserializeUser", userId);
     const user = await findUserById(userId);
-    done(null, user._id);
+    done(null, user?._id);
   });
 
   async function verifyCallback(accessToken, refreshToken, profile, done) {

@@ -18,7 +18,7 @@ async function findUserById(userId) {
 
 async function createUser(user) {
   try {
-    await User.findOneAndUpdate({ googleId: user.googleId }, user, {
+    return await User.findOneAndUpdate({ googleId: user.googleId }, user, {
       upsert: true,
       new: true,
     });
