@@ -6,7 +6,7 @@ const shiftSchema = new mongoose.Schema({
   clientId: { type: String, required: true },
   creatorId: { type: String, required: true },
   date: { type: Date, required: true },
-  detail: { type: String, required: true },
+  detail: { type: String },
   duration: { type: String, required: true },
   professionalId: { type: String, required: true },
   professionalConfirmed: { type: Boolean, required: true },
