@@ -51,7 +51,13 @@ app.use(passport.session());
 app.use("/v1", api);
 
 // Scheduling the backup everyday at 00:00:00 (using node-cron) 0 0 * * *
-cron.schedule("0 0 * * *", () => backupMongoDB());
+cron.schedule("*/5 * * * *", () => {
+  try {
+    backupMongoDB();
+  } catch (error) {
+    console.error('Error during backup:', error);
+  }
+});
 //restoreMongoDB();
 
 module.exports = app;
