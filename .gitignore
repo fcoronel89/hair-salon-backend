@@ -1,5 +1,6 @@
 *.env
 .env.prod
+.env.develop
 .vercel
 node_modules
 **/*.pem

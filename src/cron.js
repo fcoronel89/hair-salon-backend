@@ -32,6 +32,7 @@ function executeMongoCommand(command, options, successMessage) {
 }
 
 function backupMongoDB() {
+  console.log('Starting backup process...');
   const options = [
     `--uri=${MONGODB_URI}`,
     `--db=${dbInfo.dbName}`,
@@ -42,6 +43,7 @@ function backupMongoDB() {
   ];
 
   executeMongoCommand("mongodump", options, "Backup is successful");
+  console.log('Backup process completed.');
 }
 
 function restoreMongoDB() {
