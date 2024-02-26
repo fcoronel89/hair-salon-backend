@@ -12,8 +12,6 @@ const dbInfo = {
 const ARCHIVE_PATH = path.join(__dirname, "db-backup", `${dbInfo.dbName}.gzip`);
 const MONGODB_URI = `mongodb+srv://${dbInfo.user}:${dbInfo.password}@${dbInfo.host}/${dbInfo.dbName}`;
 
-
-
 function executeMongoCommand(command, options, successMessage) {
   const child = spawn(command, options);
 
@@ -61,4 +59,4 @@ function restoreMongoDB() {
   executeMongoCommand("mongorestore", options, "Restore is successful");
 }
 
-module.exports = backupMongoDB;
+module.exports = { backupMongoDB, restoreMongoDB };

@@ -6,7 +6,7 @@ const professionalRouter = require("./professional/professional.router");
 const shiftRouter = require("./shift/shift.router");
 const clientRouter = require("./client/client.router");
 const serviceRouter = require("./service/service.router");
-const downloadRouter = require("./download/download.router");
+const backupRouter = require("./backup/backup.router");
 
 const api = express.Router();
 
@@ -17,7 +17,7 @@ api.use(professionalRouter);
 api.use(shiftRouter);
 api.use(clientRouter);
 api.use(serviceRouter);
-api.use(downloadRouter);
+api.use(backupRouter);
 api.get("/", (req, res) => {
   const htmlResponse = `
       <html>
