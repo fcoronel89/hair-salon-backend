@@ -31,7 +31,7 @@ async function updateUser(userId, userData) {
   try {
     console.log("userId", userId, userData);
     const userType =
-      userData.userType === "seller" || userData.userType === "hairsalon"
+      userData.userType === "seller" || userData.userType === "hairsalon" || userData.userType === "recepcionist"
         ? userData.userType
         : "hairsalon";
     return await User.findByIdAndUpdate(
