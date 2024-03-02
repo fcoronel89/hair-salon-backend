@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String },
   createdAt: { type: Date, default: Date.now },
   neighbourhood: { type: String },
+  hairSalonId: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);
